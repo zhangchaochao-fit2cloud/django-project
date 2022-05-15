@@ -38,9 +38,46 @@ django框架学习
 > 
 > https://docs.djangoproject.com/zh-hans/4.0/topics/templates/
 > 
-> 请求和响应对啊ing
+> 请求和响应
 > 
 > https://docs.djangoproject.com/zh-hans/4.0/ref/request-response/
+> 
+> 通用视图
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/topics/class-based-views/
+> 
+> 测试
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/intro/tutorial05/#
+> 
+> 静态文件
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/ref/contrib/staticfiles/
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/howto/static-files/
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/howto/static-files/deployment/
+> 
+> 
+> pip公共仓库
+> 
+> https://pypi.org/
+> 
+> 发布应用到公共仓库
+> 
+> https://packaging.python.org/en/latest/tutorials/packaging-projects/#uploading-the-distribution-archives
+> 
+> venv 隔离 python 虚拟环境
+> 
+> https://docs.python.org/3/tutorial/venv.html
+> 
+> 打包
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/intro/reusable-apps/
+> 
+> django文档
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/intro/whatsnext/
 
 
 ### 查看版本
@@ -103,6 +140,14 @@ python manage.py sqlmigrate polls 0001
 python manage.py check
 # 使用应用迁移文件
 python manage.py migrate
+
+
+# 运行测试
+python manage.py test polls
+
+# 查看django的源文件
+python -c "import django; print(django.__path__)"
+
 
 ```
 
