@@ -23,6 +23,24 @@ django框架学习
 > settings配置
 > 
 > https://docs.djangoproject.com/zh-hans/4.0/ref/settings/
+> 
+> URL调度器
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/topics/http/urls/
+> 
+> Django查询语法
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/intro/tutorial02/
+> 
+> template语法
+> 
+> https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#anatomy_of_an_html_document
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/topics/templates/
+> 
+> 请求和响应对啊ing
+> 
+> https://docs.djangoproject.com/zh-hans/4.0/ref/request-response/
 
 
 ### 查看版本
@@ -88,12 +106,80 @@ python manage.py migrate
 
 ```
 
+### 数据库语法
+```text
+
+# 导入模板对象
+from polls.models import Choice, Question
+
+# 查询全部
+Question.objects.all()
+
+# 过滤
+Question.objects.filter(id=1)
+Question.objects.filter(question_text__startswith='What')
+
+# 获取当前发布时间的集合
+from django.utils import timezone
+current_year = timezone.now().year
+Question.objects.get(pub_date__year=current_year)
+
+# 如果 ID 不存在抛异常
+Question.objects.get(id=2)
+
+# 根据 ID 查询
+Question.objects.get(pk=1)
+
+# 调用自定义的方法
+q = Question.objects.get(pk=1)
+q.was_published_recently()
+True
+
+q = Question.objects.get(pk=1)
+# 外键关联对象
+q.choice_set.all()
+
+# 创建外键关联对象
+q.choice_set.create(choice_text='Not much', votes=0)
+q.choice_set.create(choice_text='The sky', votes=0)
+c = q.choice_set.create(choice_text='Just hacking again', votes=0)
+c.question
+
+# 获取外键关联对象数量
+q.choice_set.all()
+q.choice_set.count()
+
+# 查询
+Choice.objects.filter(question__pub_date__year=current_year)
+
+# 删除
+c = q.choice_set.filter(choice_text__startswith='Just hacking')
+c.delete()
+```
+
 ### 注意事项
 
 #### 自动重新加载服务
 ```text
 自动重新加载服务 runserver
 用于开发的服务器会在对每次访问的时候重新加载一次代码，不需要为了修改代码重新启动服务器，而新添加的文件需要重启服务
+```
+
+#### model调用不提示objects
+```python
+import datetime
+
+from django.db import models
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+    # 解决model调用没有objects问题
+    objects = models.Manager()
+
+
+    def __str__(self):
+        return self.question_text
 ```
 
 

@@ -1,0 +1,14 @@
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <!--   硬编码写法     -->
+        <!--   <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>  -->
+        <!--   使用在urls中定义的路径 detail 是 urlpatterns 中的name  -->
+        <!--  url 'detail' question.id -->
+        <!--   指定了命名空间 没有指定命名空间的路径会报错，注释也不行  -->
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
