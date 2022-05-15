@@ -11,6 +11,7 @@ django框架学习
 > https://docs.djangoproject.com/zh-hans/4.0/faq/install/#faq-python-version-support
 
 ### 官方配置
+https://docs.djangoproject.com/zh-hans/4.0/topics/
 
 > django-admin 和 manage.py
 > 
